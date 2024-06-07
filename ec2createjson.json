@@ -1,0 +1,49 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS CloudFormation Template to create an EC2 instance in an existing VPC",
+    "Resources": {
+      "MyEC2Instance": {
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "InstanceType": "t2.micro",
+          "KeyName": "myserver",
+          "ImageId": "ami-00beae93a2d981137",
+          "NetworkInterfaces": [
+            {
+              "AssociatePublicIpAddress": true,
+              "DeviceIndex": 0,
+              "SubnetId": "subnet-0d3b49928b999e38c",
+              "GroupSet": [
+                "sg-07a972099d4c7a460"
+              ]
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "MyEC2Instance"
+            },
+            {
+              "Key": "terminate",
+              "Value": "yes"
+            }
+          ]
+        }
+      }
+    },
+    "Outputs": {
+      "InstanceId": {
+        "Description": "The Instance ID of the EC2 instance",
+        "Value": {
+          "Ref": "MyEC2Instance"
+        }
+      },
+      "PublicIP": {
+        "Description": "The Public IP address of the EC2 instance",
+        "Value": {
+          "Fn::GetAtt": ["MyEC2Instance", "PublicIp"]
+        }
+      }
+    }
+  }
+  

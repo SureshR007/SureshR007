@@ -1,0 +1,17 @@
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-00beae93a2d981137
+      KeyName: myserver
+      SecurityGroupIds:
+        - sg-0bedaa4e6b60a7485
+      SubnetId: subnet-012049b1ae15f7c86
+      Tags:
+        - Key: Name
+          Value: MyEC2Instance1
+        - Key: terminate
+          Value: "yes"
+
+        
